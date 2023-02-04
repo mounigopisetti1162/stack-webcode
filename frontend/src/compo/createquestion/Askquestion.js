@@ -42,11 +42,12 @@ Looking to ask a non-programming question? See the topics here to find a relevan
           </div>
           <div className='g-content'>
             <div className='pen'>
-            <AnchorIcon/> </div>
+            <AnchorIcon fontSize='large'/> </div>
             <div className='notes'>
-            Your title should summarize the problem. <br/>
-
-You might find that you have a better idea of your title after writing out the rest of the question.
+            <p>Your title should summarize the problem. 
+            </p>
+<p>You might find that you have a better idea of your title after writing out the rest of the question.
+</p>
             </div>
           </div>
         </div>

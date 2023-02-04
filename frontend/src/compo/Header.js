@@ -15,7 +15,7 @@ import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Header()
 {
@@ -27,6 +27,7 @@ export default function Header()
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const nav=useNavigate()
     return(
         <header>
         <div className="header-bar">
@@ -133,10 +134,10 @@ export default function Header()
 
             </div>
             <div className="login">
-            <Button variant="outlined">Log in</Button>
+            <Button variant="outlined" onClick={()=>{nav('/login')}}>Log in</Button>
             </div>
             <div className="sign_up">
-            <Button variant="contained">Sign up</Button>
+            <Button variant="contained" onClick={()=>{nav('/signup')}}>Sign up</Button>
             </div>
         
         

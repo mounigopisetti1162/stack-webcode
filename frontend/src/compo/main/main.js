@@ -5,6 +5,10 @@ import { useNavigate } from 'react-router-dom'
 
 function Main() {
     const nav=useNavigate()
+    const question=()=>{
+        const token=localStorage.getItem('token')
+        token?nav("/"):nav('/login')
+    }
   return (
     <>
     <div className='main-container'>
@@ -13,7 +17,7 @@ function Main() {
             <h1 class="flex--item fl1 fs-headline1 mb0">
 Search Results            </h1>
             <Link className='advanced'>Advanced Search Tips</Link>
-            <Button variant="contained" onClick={()=>{nav('/ask-question')}}>Ask Question</Button>
+            <Button variant="contained" onClick={question}>Ask Question</Button>
         </div>
         <div className='main-filter'>
             <p>All questions</p>

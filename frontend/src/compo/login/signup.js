@@ -40,7 +40,7 @@ export default function Signup()
         }
         setstatus("submited");
         
-        return data.json();}).then((data)=>{navigate("/home")
+        return data.json();}).then((data)=>{navigate("/")
             
         localStorage.setItem('token',data.token);
         })
@@ -152,7 +152,7 @@ export default function Signup()
     
     <div className="col-sm-3 col2">
     <img className='images' src="https://www.shutterstock.com/image-photo/rajamundry-bridge-sunset-train-600w-1239643729.jpg"  alt='images'></img>
-    <button onClick={login}>Login Page</button>
+    <button onClick={login} className="btn btn-success">Login Page</button>
     </div>
   </div>
   </div>

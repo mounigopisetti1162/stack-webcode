@@ -10,13 +10,14 @@ export default function Login() {
   const nav=useNavigate();
   const {values,handleChange,handleSubmit}=useFormik({
 initialValues:{
-  username:'mounika',
+    email:'',
+  password:''
   
 },
 onSubmit:(values)=>{
     setstatus('loding..') 
     console.log(values)
-    fetch(`${API}/user/login`,{
+    fetch(`${API}/login`,{
       method:'POST',
       body:JSON.stringify(values),
       headers:{"Content-Type":"application/json"},
@@ -37,18 +38,59 @@ onSubmit:(values)=>{
   })
   return(
   <>
+  <div className='login'>
   <div className="container-md container1"><h2>login Page</h2>
+  <div className='cont'>
     <div className="row justify-content-center">
     <div className="col-sm-6 col1">
-    <h1>stack login</h1>
+    <h1>Stack Login</h1>
     <form className="login-form" onSubmit={handleSubmit}>
-      <input name='username' value={values.username} onChange={handleChange} type='text' placeholder='username'>
+    <div className="input-group mb-3">
+  <div className="input-group-text">
+  <span >Mail</span>
+    
+  </div>
+  <input
+            type="text"
+            name="email"
+            className="form-control"
+            value={values.email}
+            onChange={handleChange}
+            
+          />
+</div>
+<div className="input-group mb-3">
+  <div className="input-group-text">
+  <span >Password</span>
+    
+  </div>
+  <input
+            type="text"
+            name="password"
+            className="form-control"
+            value={values.password}
+            onChange={handleChange}
+            
+          />
+</div>
+      {/* <input name='username' value={values.username} onChange={handleChange} type='text' placeholder='username'>
         </input>
         <input name='password' value={values.password} onChange={handleChange} type='text' placeholder='password'>
         </input>
-        
-        <button onSubmit={handleSubmit} type=" " >{status}</button>
+         */}
+        <button onSubmit={handleSubmit} type=" " className="btn btn-primary">{status}</button>
         </form>
+        </div>
+       < div className="col-sm-6 col2">
+        <div className='anothepage'>
+            <div class name='signuppage'>
+                <div className='signupbutton'>
+                <button onClick={()=>{nav("/signup")}} className="btn btn-primary" >signup</button>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
         </div>
         </div>
         </div>

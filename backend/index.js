@@ -69,6 +69,8 @@ app.post('/user',async function(req,res)
     const hashpassword=await generatehashedpassword(password)
       //  db.movies.insertMany(data)
     //  
+    // const token=jwt.sign({id:usernamefound._id},process.env.SCRETE_TOKEN)
+
     const newuser = await addnewuser(firstname,lastname,email,hashpassword)
     console.log(newuser)
       res.send(newuser)
@@ -105,7 +107,7 @@ app.get('/reset-password',async function(request,responce)
     }
     else{
 
-responce.send({message:'we will reset the password',token:token})
+responce.send({message:'we will reset the password'})
  
     }
 })
@@ -128,8 +130,10 @@ app.post('/reset-password',async function(request,responce)
 
 })
 app.post('/login', async function (request, responce) {
-    const {username,password,roleId} = request.body;
-    const usernamefound=await getuser(username)
+    const {email,password,roleId} = request.body;
+    console.log("login")
+
+    const usernamefound=await getuser(email)
     console.log(usernamefound)
   
     if(!usernamefound)
@@ -137,11 +141,12 @@ app.post('/login', async function (request, responce) {
   responce.send({message:'username not found'})
     }
     else{
+        console.log('password')
   const pass=await bcrypt.compare(password,usernamefound.password)
   if(pass)
   {
-    const roleId=usernamefound.roleId
-    console.log(roleId)
+    // const roleId=usernamefound.roleId
+    // console.log(roleId)
     const token=jwt.sign({id:usernamefound._id},process.env.SCRETE_TOKEN)
     responce.status(200).send({message:"logged in sucessfully",token:token})
   }
@@ -161,11 +166,11 @@ export {client}
 
 
 async function addnewuser(firstname,lastname,email,hashpassword) {
-    return await client.db('password_page').collection('user').insertOne({ firstname:firstname,lastname:lastname,email: email, password: hashpassword, });
+    return await client.db('stack').collection('user').insertOne({ firstname:firstname,lastname:lastname,email: email, password: hashpassword, });
 }
 
-async function getuser(username) {
-    return await client.db('stack').collection('user').findOne({ username: username });
+async function getuser(email) {
+    return await client.db('stack').collection('user').findOne({ email: email });
 }
 async function getuser1() {
     return await client.db('stack').collection('user').find({ }).toArray();

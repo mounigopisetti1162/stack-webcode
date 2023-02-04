@@ -1,17 +1,35 @@
-/* .container1
+.container1
 {
-background-color: rgb(65, 164, 164);
+    display: flex;
+    flex-direction: column;
+background-color: rgb(151, 171, 171);
 height: 90% !important;
 text-align: center;
+/* align-items: center; */
+justify-content: center;
+width:60%
+}
+.cont{
+
 }
 .col1{
-  background-color: antiquewhite;
+  background-color: rgb(255, 255, 255);
 }
 .col2{
-  background-color: rgb(106, 77, 39);
+  background-color: rgb(167, 234, 232);
   width: 45%;
 }
 .images{
   width: 100%;
-  height: 100%;
-} */
+  height: 90%;
+}
+.signupbutton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.signupbutton > button{
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}

@@ -3,7 +3,7 @@
 header{
   display: flex;
   position: sticky !important;
-  min-height: 6vh !important;
+  min-height: 4vh !important;
   background-color: #ffffff;
   margin-left: 5px !important;
   margin-right:5px !important ;
@@ -21,12 +21,12 @@ header{
   align-items: center;
   justify-content: center;
   gap: 5px;
-  height: 10vh;
+  height: 5vh;
   box-shadow: 0px 3px 0px 5px rgba(53, 51, 51, 0.178) ;
 }
 .stack{
   width: 200px;
-  height: 20vh !important;
+  height: 5vh !important;
   object-fit: contain ;
   cursor: pointer;
 }

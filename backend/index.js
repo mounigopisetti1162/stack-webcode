@@ -2,8 +2,6 @@ import * as dotenv from 'dotenv'
 import express from 'express'
 import { MongoClient } from 'mongodb'
 import cors from 'cors'
-import mobileRouter from './route/mobile.route.js'
-import userRouter from './route/user.route.js'
 
 export const app=express()
 dotenv.config()

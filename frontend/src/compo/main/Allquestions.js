@@ -28,7 +28,7 @@ function Allquestions() {
                 <div className='accountname'> 
                 <div className='author-details'>
                     <AccountCircleIcon/>
-                    <p>usernameffff</p></div></div>
+                    <p>usernameffffd</p></div></div>
 
                     helo00
 

@@ -39,11 +39,11 @@ onSubmit:(values)=>{
   return(
   <>
   <div className='login'>
-  <div className="container-md container1"><h2>login Page</h2>
-  <div className='cont'>
+  <div className="container-md container2"><h2>login Page</h2>
+  <div className='cont2'>
     <div className="row justify-content-center">
     <div className="col-sm-6 col1">
-    <h1>Stack Login</h1>
+    <p>Stack Login</p>
     <form className="login-form" onSubmit={handleSubmit}>
     <div className="input-group mb-3">
   <div className="input-group-text">

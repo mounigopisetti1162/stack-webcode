@@ -49,6 +49,7 @@ export default function Signup()
     return(
     <div className="container-md container1"><h2>SIGN UP PAGE </h2>
     <div className="row justify-content-center">
+        <div className="cont">
     <div className="col-sm-6 col1">
     <form class="row g-3">
     <div className="input-group mb-3">
@@ -154,6 +155,7 @@ export default function Signup()
     <img className='images' src="https://www.shutterstock.com/image-photo/rajamundry-bridge-sunset-train-600w-1239643729.jpg"  alt='images'></img>
     <button onClick={login} className="btn btn-success">Login Page</button>
     </div>
+  </div>
   </div>
   </div>
 )

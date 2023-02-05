@@ -18,7 +18,7 @@ text-align: center;
 }
 header{
   display: flex;
-  position: sticky !important;
+  position: fixed !important;
   min-height: 4vh !important;
   background-color: #ffffff;
   margin-left: 5px !important;

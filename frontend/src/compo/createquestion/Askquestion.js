@@ -1,8 +1,89 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AnchorIcon from '@mui/icons-material/Anchor';
 import { Button } from '@mui/material';
+import { useFormik } from 'formik';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
+import Editor from "react-quill";
 import './ask.css'
+import { API } from '../login/global';
+import axios from 'axios';
+import {TagsInput} from 'react-tag-input-component'
+import { useNavigate } from 'react-router-dom';
 function Askquestion() {
+
+  var toolbarOptions = [
+    ["bold", "italic", "underline", "strike"], // toggled buttons
+    ["blockquote", "code-block"],
+
+    [{ header: 1 }, { header: 2 }], // custom button values
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ script: "sub" }, { script: "super" }], // superscript/subscript
+    [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+    [{ direction: "rtl" }], // text direction
+
+    [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+    [{ font: [] }],
+    [{ align: [] }],
+
+    ["clean"], // remove formatting button
+  ];
+  Editor.modules = {
+    syntax: false,
+    toolbar: toolbarOptions,
+    clipboard: {
+      // toggle to add extra line breaks when pasting HTML:
+      matchVisual: false,
+    },
+  };
+  /*
+   * Quill editor formats
+   * See https://quilljs.com/docs/formats/
+   */
+  Editor.formats = [
+    "header",
+    "font",
+    "size",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "blockquote",
+    "list",
+    "bullet",
+    "indent",
+    "link",
+    "image",
+    "video",
+  ];
+  const nav=useNavigate()
+  const [title,settitle]=useState("")
+  const [body,setbody]=useState("")
+  const [tags, settags] = useState(["tags"]);
+const handelbody=(value)=>{
+  setbody(value)
+}
+const handleSubmit=async(e)=>{
+e.preventDefault()
+if(title!==0 && body!==0)
+{
+  const bodyJSON={
+    title:title,
+    body:body,
+    tags:JSON.stringify(tags),
+
+  }
+  await axios.post(`${API}/askquestion`,bodyJSON).then((res)=>{
+    alert("question added");
+    nav("/")
+  })
+}
+}  
+// console.log(tags)
   return (
     <div className='askquestion-page'>
       <div className='page-container'>
@@ -40,7 +121,7 @@ Looking to ask a non-programming question? See the topics here to find a relevan
           <div className='g-title'>
             <p>Writing a good title</p>
           </div>
-          <div className='g-content'>
+          <div className='gcontent'>
             <div className='pen'>
             <AnchorIcon fontSize='large'/> </div>
             <div className='notes'>
@@ -52,23 +133,42 @@ Looking to ask a non-programming question? See the topics here to find a relevan
           </div>
         </div>
         </div>
-        <div className='title-box'>
-          <div className='title-b'>
+        <div className='titlebox'>
+          <div className='titlebe'>
+          <div className='titleb'>
             <h5>Title</h5>
           </div>
-          <div className='title-tag'>
+          <div className='titletag'>
             <p>Be specific and imagine you're asking a question to another person.</p>
           </div>
-          <div className='title-input'>
-            <input className='title-input' placeholder='e.g. Is there an R function for finding the index of an element in a vector'/>
-            <Button variant="contained" className='next'>Next</Button>
+          <div className=' col-4 titleinput2'>
+            <input className='titleinput' name="titleinput" value={title} onChange={(e)=>settitle(e.target.value)}  placeholder='e.g. Is there an R function for finding the index of an element in a vector' />
+            <Button variant="contained" className='next' >Next</Button>
           </div>
-
-
-
+          </div>
         </div>
-
-
+        
+        <div classsName='bodyvalue'>
+          <div className='body-side'>
+          <div className='g-title'>
+            <h5>What are the details of your problem?</h5>
+            <h6>Introduce the problem and expand on what you put in the title. Minimum 20 characters.</h6>
+            </div>
+            <ReactQuill modules={Editor.modules}
+                  className="react-quill" onChange={handelbody} name="body" value={body} theme='snow'/>
+            
+            
+</div>
+            </div>
+            <div className='tag'>
+            <div className='tags'>
+            <h5>Tags</h5>
+            <h6>Add up to 5 tags to describe what your question is about. Start typing to see suggestions.</h6>
+            <TagsInput  value={tags} 
+        onChange={settags} placeHolder='press enter to add tags'/>
+        <Button variant="contained" className='primary' onClick={handleSubmit}>Add ur question</Button>
+        </div>
+            </div>
       </div>
     </div>
   )

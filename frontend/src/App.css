@@ -18,7 +18,8 @@ text-align: center;
 }
 header{
   display: flex;
-  position: fixed !important;
+  position: sticky !important;
+  width: 100%;
   min-height: 4vh !important;
   background-color: #ffffff;
   margin-left: 5px !important;
@@ -32,24 +33,42 @@ header{
 }
 .header-bar{
   display: flex;
+  flex-direction: row;
   width:100%;
   border-radius: 10px;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  height: 5vh;
-  box-shadow: 0px 3px 0px 5px rgba(53, 51, 51, 0.178) ;
+  gap: 3px;
+  height: 7vh;
+  /* height: 100% !important; */
+  box-shadow: 0px 1px 0px 1px rgba(53, 51, 51, 0.178) ;
+}
+.header-buttons{
+  /* background-color: #4CAF50 !important; Green */
+  border: none !important;
+  /* color: white !important; */
+  padding: 5px 10px !important;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block !important;
+  font-size: 10px !important;
+}
+.stack_icon{
+  width:100px
 }
 .stack{
-  width: 200px;
-  height: 5vh !important;
+  width: 100px;
+  height: 3vh !important;
   object-fit: contain ;
   cursor: pointer;
 }
-.stack:hover,.about:hover,.products:hover,.for_team:hover,.three_lines:hover{
+.about:hover,.products:hover,.for_team:hover,.three_lines:hover{
   background-color: #ddd;
   cursor: pointer;
   
+}
+.stack:hover{
+  cursor: pointer;
 }
 .about,.products,.for_team{
   width:100px;
@@ -58,20 +77,21 @@ header{
   padding: 10px 15px 10px 9px;
   border-radius: 33px;
   font-weight: 300;
-  font-size:larger;
+  font-size:small;
 }
 .search_bar{
 
   border-radius: 10px !important;
   border: 1px solid rgba(0, 0, 0, 0.178);
+  font: 100;
 }
 .search{
-  font-weight: 200px;
-  font-size: large;
+  font-weight: 100px;
+  font-size: medium !important;
   border: none !important;
   outline: none;
-  height: 4vh !important;
-  width:300px
+  height: 2vh !important;
+  width:100px
 }
 .login:hover{
   background-color:#bfdbf7 ;
@@ -90,7 +110,7 @@ header{
 }
 @media screen and (min-width:1228px) {
   .search_bar{
-    width: calc(20*2vw);
+    width: calc(20*1vw);
   }
   .search{
     width: 90%;

@@ -46,7 +46,7 @@ export default function Header()
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-<HorizontalSplitIcon color="action" fontSize='large' />
+<HorizontalSplitIcon color="action" fontSize='small' />
 </IconButton>
 </Tooltip>
       </Box>
@@ -134,10 +134,10 @@ export default function Header()
 
             </div>
             <div className="login">
-            <Button variant="outlined" onClick={()=>{nav('/login')}}>Log in</Button>
+            <Button variant="outlined" className='header-buttons' onClick={()=>{nav('/login')}}>Log in</Button>
             </div>
             <div className="sign_up">
-            <Button variant="contained" onClick={()=>{nav('/signup')}}>Sign up</Button>
+            <Button variant="contained" className='header-buttons' onClick={()=>{nav('/signup')}}>Sign up</Button>
             </div>
         
         

@@ -3,7 +3,7 @@ import { Button,Link } from '@mui/material'
 import Allquestions from './Allquestions'
 import { useNavigate } from 'react-router-dom'
 
-function Main() {
+function Main({questions}) {
     const nav=useNavigate()
     const question=()=>{
         const token=localStorage.getItem('token')
@@ -38,18 +38,15 @@ Search Results            </h1>
         <hr></hr>
         </div>
     </div>
-    <div className='questions'>
-        <div className='question'>
-            <Allquestions/>
-            <Allquestions/>
-            <Allquestions/>
-            <Allquestions/>
-            <Allquestions/>
-            <Allquestions/>
-
+    <div className="questions">
+          {questions?.map((_q,key) => (
+            <div className="question" key={key}>
+              <Allquestions data={_q} />
+            </div>
+          ))}
         </div>
 
-    </div>
+    
     </div>
     </div>
     </>

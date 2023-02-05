@@ -1,10 +1,13 @@
-import  express, { text } from "express";
-import {  MongoClient, ObjectId } from "mongodb";
+import  express from "express";
+import {  MongoClient } from "mongodb";
 import cors from 'cors'
+import { ObjectId } from 'mongodb';
+
 import * as dotenv from 'dotenv'
 import bcrypt from 'bcrypt'
 import jwt  from "jsonwebtoken";
 import nodemailer from 'nodemailer'
+import { getuser1, addnewuser, getuser, getuserbyid, updatepass } from "./router/usersRouter.js";
 export const app=express()
 dotenv.config()
 const PORT=process.env.PORT||4000
@@ -159,28 +162,35 @@ app.post('/login', async function (request, responce) {
   
   });
 
+
+
+  app.post('/askquestion',async function(request,responce)
+  {
+    const {title,body,tags}=request.body;
+    const question= await client.db('stack').collection('questions').insertOne({title:title,body:body,tags:tags})
+    responce.send(question)
+
+  })
+
+  app.get('/askquestion',async function(request,responce)
+  {
+    const questions= await client.db('stack').collection('questions').find({}).toArray()
+    responce.send(questions)
+
+  })
+
+  app.delete('/askquestion/:id',async function(request,responce)
+  {
+    const {id}=request.params
+    const questions= await client.db('stack').collection('questions').deleteOne({ _id: ObjectId(id) })
+    responce.send(questions)
+
+  })
+
 app.listen(PORT,()=>console.log(`server ${PORT}`))
 export {client}
 
 
 
 
-async function addnewuser(firstname,lastname,email,hashpassword) {
-    return await client.db('stack').collection('user').insertOne({ firstname:firstname,lastname:lastname,email: email, password: hashpassword, });
-}
-
-async function getuser(email) {
-    return await client.db('stack').collection('user').findOne({ email: email });
-}
-async function getuser1() {
-    return await client.db('stack').collection('user').find({ }).toArray();
-}
-async function getuserbyid(id) {
-    return await client.db('stack').collection('user').findOne({_id:ObjectId(id)}).toArray();
-}
-async function updatepass(id,newpass) {
-    console.log('password updTE')
-    return client.db('stack').collection('user').updateOne({_id:ObjectId(id)},{$set:{password:newpass,verfication:'changed'}});
-    // 
-}
 

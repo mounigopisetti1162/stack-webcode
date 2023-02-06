@@ -24,6 +24,7 @@ function App() {
       <Route path='/reset-password/:id/:token'element={<Form/>}/>
       <Route path='/form'element={<Form/>}/>
       <Route path='/questionview/:id' element={<Index/>}/>
+      <Route path='/answer' element={<Index/>}/>
 
       
       </Routes>

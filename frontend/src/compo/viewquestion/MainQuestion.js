@@ -71,7 +71,7 @@ function MainQuestion() {
   const [answer, setAnswer] = useState("");
   const [show, setShow] = useState(false);
   const [comment, setComment] = useState("");
-
+console.log("questionData")
   const handleQuill = (value) => {
     setAnswer(value);
   };
@@ -79,8 +79,7 @@ function MainQuestion() {
   useEffect(() => {
     async function getFunctionDetails() {
       await axios
-        .get(`${API}/questionview/${id}`)
-        console.log("iddd")
+        .get(`${API}/askquestion/${id}`)
         .then((res) => setQuestionData(res.data[0]))
         .catch((err) => console.log(err));
     }
@@ -90,7 +89,6 @@ function MainQuestion() {
   async function getUpdatedAnswer() {
     await axios
       .get(`${API}/questionview/${id}`)
-      console.log("")
       .then((res) => setQuestionData(res.data[0]))
       .catch((err) => console.log(err));
   }

@@ -187,7 +187,7 @@ app.post('/login', async function (request, responce) {
 
   })
 
-  app.get('/questionview/:id',async function(request,responce)
+  app.get('/askquestion/:id',async function(request,responce)
   {
 const {id}=request.params
 console.log(id)

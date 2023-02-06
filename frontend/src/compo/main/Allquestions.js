@@ -22,7 +22,7 @@ function Allquestions({data}) {
                 </div>
             </div>
             <div className='single-question-middle'>
-                <div className='asked-question'><Link to={`/question view?q=${data?._id}`}>{data.title}</Link> </div>
+                <div className='asked-question'><Link to={`/questionview/${data?._id}`}>{data.title}</Link> </div>
                 <div
             style={{
               maxWidth: "90%",
@@ -54,9 +54,9 @@ function Allquestions({data}) {
                 <div className='accountname'> 
                 <div className='author-details'>
                     <AccountCircleIcon/>
-                    <p>usernameffffd</p></div></div>
+                    <p>Username</p></div></div>
 
-                    helo00
+                
 
             </div>
             </div>

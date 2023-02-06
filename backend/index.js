@@ -187,6 +187,30 @@ app.post('/login', async function (request, responce) {
 
   })
 
+  app.get('/questionview/:id',async function(request,responce)
+  {
+const {id}=request.params
+console.log(id)
+const question=await client.db('stack').collection('questions').findOne({_id:ObjectId(id)})
+responce.send(question)
+})
+
+
+app.post('/answer'),async function(request,responce)
+{
+  const {question_id,answer}=request.body;
+  const question= await client.db('stack').collection('answers').insertOne({question_id:question_id,answer:answer})
+  responce.send(question)
+}
+
+app.post('/comments/:id'),async function(request,responce)
+{
+    const {id}=request.params
+  const {question_id,comment}=request.body;
+  const question= await client.db('stack').collection('comments').insertOne({question_id:question_id,comment:comment})
+  responce.send(question)
+}
+
 app.listen(PORT,()=>console.log(`server ${PORT}`))
 export {client}
 

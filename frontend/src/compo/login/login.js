@@ -85,7 +85,7 @@ onSubmit:(values)=>{
         <div className='anothepage'>
             <div class name='signuppage'>
                 <div className='signupbutton'>
-                <button onClick={()=>{nav("/signup")}} className="btn btn-primary" >signup</button>
+                <button onClick={()=>{nav("/signup")}} className="btn btn-primary" >signup</button><br></br>
                 </div>
             </div>
         </div>

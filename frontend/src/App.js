@@ -23,7 +23,7 @@ function App() {
       <Route path='/signup' element={<Signup/>}/>
       <Route path='/reset-password/:id/:token'element={<Form/>}/>
       <Route path='/form'element={<Form/>}/>
-      {/* <Route path='/question view'element={<Index/>}/> */}
+      <Route path='/questionview/:id' element={<Index/>}/>
 
       
       </Routes>

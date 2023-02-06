@@ -137,11 +137,11 @@ export default function Signup()
     </div>
   </div> */}
 
-<div className="btn">
+<div className="signbutton">
           <button
             type="submit"
             onClick={handleSubmit}
-            className="btn btn-success"
+            className="btn btn-success buttonlog"
           >
             Success {status}
           </button>
@@ -151,8 +151,7 @@ export default function Signup()
     </div>
   
     
-    <div className="col-sm-3 col2">
-    <img className='images' src="https://www.shutterstock.com/image-photo/rajamundry-bridge-sunset-train-600w-1239643729.jpg"  alt='images'></img>
+    <div className="col-sm-3 loginbutton">
     <button onClick={login} className="btn btn-success">Login Page</button>
     </div>
   </div>

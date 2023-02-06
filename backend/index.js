@@ -199,6 +199,7 @@ responce.send(question)
 app.post('/answer'),async function(request,responce)
 {
   const {question_id,answer}=request.body;
+  console.log("answesss")
   const question= await client.db('stack').collection('answers').insertOne({question_id:question_id,answer:answer})
   responce.send(question)
 }

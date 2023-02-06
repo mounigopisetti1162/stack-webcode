@@ -80,7 +80,13 @@ console.log(questionData)
     setAnswer(value);
   }
   function getFunctionDetails() {
-    fetch(`${API}/askquestion/${id}`).then((data)=> data.json()).then((res) =>setQuestionData(res)).catch((err) => console.log(err));
+    fetch(`${API}/askquestion/${id}`)
+    .then((data)=> data.json())
+    .then((res) =>{
+      setQuestionData(res)
+      console.log(res)
+    })
+    .catch((err) => console.log(err));
   }
 
   useEffect(() => {
@@ -137,6 +143,7 @@ console.log(questionData)
     }
 
   }
+console.log(questionData.title)
   return (
     <div className="main">
         {questionData ===""?<h2>Loading...</h2>:
@@ -144,7 +151,7 @@ console.log(questionData)
       <div className="main-container">
         <div className="main-top">
           <h2 className="main-question">{questionData?.title} </h2>
-          <Link to="/add-question">
+          <Link to="/ask-question">
             <button>Ask Question</button>
           </Link>
           
@@ -153,7 +160,7 @@ console.log(questionData)
           <div className="info">
             <p>
               Asked
-              <span>{new Date(questionData?.created_at).toLocaleString()}</span>
+              {/* <span>{new Date(questionData?.created_at).toLocaleString()}</span> */}
             </p>
             <p>
               Active<span>today</span>
@@ -177,19 +184,11 @@ console.log(questionData)
               </div>
             </div>
             <div className="question-answer">
-              {/* <p>{parse(questionData?.body)}</p> */}
+              <p>{parse(questionData?.body)}</p>
 
               <div className="author">
-                <small>
-                  asked {new Date(questionData?.created_at).toLocaleString()}
-                </small>
-                <div className="auth-details">
-                  <p>
-                    {questionData?.user?.displayName
-                      ? questionData?.user?.displayName
-                      : "Natalia lee"}
-                  </p>
-                </div>
+                
+                
               </div>
               <div className="comments">
                 <div className="comment">
@@ -251,9 +250,9 @@ console.log(questionData)
               fontWeight: "300",
             }}
           >
-            {questionData && questionData?.answerDetails.length} Answers
+            {/* {questionData && questionData?.answerDetails.length} Answers */}
           </p>
-          {questionData?.answerDetails.map((_q) => (
+          {/* {questionData?.answerDetails.map((_q) => (
             <>
               <div
                 style={{
@@ -290,7 +289,7 @@ console.log(questionData)
                 </div>
               </div>
             </>
-          ))}
+          ))} */}
         </div>
        
       </div>

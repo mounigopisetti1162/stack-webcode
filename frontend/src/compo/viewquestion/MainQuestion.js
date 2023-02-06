@@ -88,7 +88,7 @@ console.log(questionData)
         // .get(`${API}/askquestion/${id}`)
         // .then((res) => setQuestionData(res.data[0]))
         // .catch((err) => console.log(err));
-    
+  
     getFunctionDetails();
   }, []);
 

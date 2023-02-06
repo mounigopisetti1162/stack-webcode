@@ -66,25 +66,31 @@ function MainQuestion() {
   // console.log(params)
 
   // const id = params.get("/");
+const intial={
+  title:'',
+  body:'',
 
-  const [questionData, setQuestionData] = useState();
+}
+  const [questionData, setQuestionData] = useState("");
   const [answer, setAnswer] = useState("");
   const [show, setShow] = useState(false);
   const [comment, setComment] = useState("");
-console.log("questionData")
-  const handleQuill = (value) => {
+console.log(questionData)
+  function handleQuill(value) {
     setAnswer(value);
-  };
+  }
+  function getFunctionDetails() {
+    fetch(`${API}/askquestion/${id}`).then((data)=> data.json()).then((res) =>setQuestionData(res)).catch((err) => console.log(err));
+  }
 
   useEffect(() => {
-    async function getFunctionDetails() {
-      await axios
-        .get(`${API}/askquestion/${id}`)
-        .then((res) => setQuestionData(res.data[0]))
-        .catch((err) => console.log(err));
-    }
+     
+        // .get(`${API}/askquestion/${id}`)
+        // .then((res) => setQuestionData(res.data[0]))
+        // .catch((err) => console.log(err));
+    
     getFunctionDetails();
-  }, [id]);
+  }, []);
 
   async function getUpdatedAnswer() {
     await axios

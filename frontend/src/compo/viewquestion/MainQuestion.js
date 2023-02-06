@@ -139,6 +139,8 @@ console.log(questionData)
   }
   return (
     <div className="main">
+        {questionData ===""?<h2>Loading...</h2>:
+        <div>
       <div className="main-container">
         <div className="main-top">
           <h2 className="main-question">{questionData?.title} </h2>
@@ -322,6 +324,8 @@ console.log(questionData)
       >
         Post your answer
       </button>
+      </div>
+}
     </div>
   );
 }

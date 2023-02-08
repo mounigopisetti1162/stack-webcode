@@ -71,7 +71,7 @@ const intial={
   body:'',
 
 }
-  const [questionData, setQuestionData] = useState("");
+  const [questionData, setQuestionData] = useState(intial);
   const [answer, setAnswer] = useState("");
   const [show, setShow] = useState(false);
   const [comment, setComment] = useState("");
@@ -126,7 +126,7 @@ console.log(questionData)
       })
       .catch((err) => console.log(err));
   };
-
+console.log(show)
   const handleComment = async () => {
     if (comment !== "") {
       const body = {

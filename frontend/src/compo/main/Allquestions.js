@@ -6,7 +6,8 @@ function Allquestions({data}) {
     function truncate(str, n) {
         return str?.length > n ? str.substr(0, n - 1) + "..." : str;
       }
-    //   let tags = JSON.parse(data?.tags[0]);
+      let tags = data.tags[0];
+
   return (
     <div className='single-questions'>
         <div className='single-question-container'>
@@ -30,24 +31,8 @@ function Allquestions({data}) {
           >
             <div>{parse(truncate(data.body, 200))}</div>
           </div>
-                {/* <div
-            style={{
-              display: "flex",
-            }}
-          >
-            {tags.map((_tag,key) => (
-              <p key={key}
-                style={{
-                  margin: "10px 5px",
-                  padding: "5px 10px",
-                  backgroundColor: "#007cd446",
-                  borderRadius: "3px",
-                }}
-              >
-                {_tag}
-              </p>
-            ))}
-          </div> */}
+              {data.tags.map((e)=><p>{e}</p>)}
+              
                 
             
             <div className='single-question-right'>

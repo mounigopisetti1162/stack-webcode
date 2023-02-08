@@ -14,36 +14,32 @@ import { useNavigate } from 'react-router-dom';
 function Askquestion() {
 
   var toolbarOptions = [
-    ["bold", "italic", "underline", "strike"], // toggled buttons
+    ["bold", "italic", "underline", "strike"], 
     ["blockquote", "code-block"],
 
-    [{ header: 1 }, { header: 2 }], // custom button values
+    [{ header: 1 }, { header: 2 }], 
     [{ list: "ordered" }, { list: "bullet" }],
-    [{ script: "sub" }, { script: "super" }], // superscript/subscript
-    [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
-    [{ direction: "rtl" }], // text direction
+    [{ script: "sub" }, { script: "super" }], 
+    [{ indent: "-1" }, { indent: "+1" }],
+    [{ direction: "rtl" }], 
 
-    [{ size: ["small", false, "large", "huge"] }], // custom dropdown
+    [{ size: ["small", false, "large", "huge"] }], 
     [{ header: [1, 2, 3, 4, 5, 6, false] }],
 
-    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+    [{ color: [] }, { background: [] }], 
     [{ font: [] }],
     [{ align: [] }],
 
-    ["clean"], // remove formatting button
+    ["clean"], 
   ];
   Editor.modules = {
     syntax: false,
     toolbar: toolbarOptions,
     clipboard: {
-      // toggle to add extra line breaks when pasting HTML:
       matchVisual: false,
     },
   };
-  /*
-   * Quill editor formats
-   * See https://quilljs.com/docs/formats/
-   */
+  
   Editor.formats = [
     "header",
     "font",
@@ -60,10 +56,11 @@ function Askquestion() {
     "image",
     "video",
   ];
+  var intial=[]
   const nav=useNavigate()
   const [title,settitle]=useState("")
   const [body,setbody]=useState("")
-  const [tags, settags] = useState(["tags"]);
+  const [tags, settags] = useState(intial);
 const handelbody=(value)=>{
   setbody(value)
 }
@@ -74,16 +71,19 @@ if(title!==0 && body!==0)
   const bodyJSON={
     title:title,
     body:body,
-    tags:JSON.stringify(tags),
+    tags:tags,
 
   }
+  console.log(bodyJSON)
   await axios.post(`${API}/askquestion`,bodyJSON).then((res)=>{
     alert("question added");
     nav("/")
   })
 }
+
+
 }  
-// console.log(tags)
+console.log(tags)
   return (
     <div className='askquestion-page'>
       <div className='page-container'>

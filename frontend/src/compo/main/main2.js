@@ -7,7 +7,7 @@ function Main({questions}) {
     const nav=useNavigate()
     const question=()=>{
         const token=localStorage.getItem('token')
-        token?nav("/ask-question"):nav('/login')
+        token?nav("/askquestion"):nav('/login')
     }
   return (
     <>

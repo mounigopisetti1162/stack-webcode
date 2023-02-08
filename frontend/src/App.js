@@ -18,13 +18,13 @@ function App() {
       <Routes>
       
       <Route path='/' element={<Page/>}/>
-      <Route path='/ask-question' element={<Askquestion/>}/>
+      <Route path='/askquestion' element={<Askquestion/>}/>
       <Route path='/login' element={<Login/>}/>
       <Route path='/signup' element={<Signup/>}/>
       <Route path='/reset-password/:id/:token'element={<Form/>}/>
       <Route path='/form'element={<Form/>}/>
       <Route path='/questionview/:id' element={<Index/>}/>
-      <Route path='/answer' element={<Index/>}/>
+      {/* <Route path='/answer' element={<Index/>}/> */}
 
       
       </Routes>

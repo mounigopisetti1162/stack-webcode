@@ -160,8 +160,8 @@ Looking to ask a non-programming question? See the topics here to find a relevan
             
 </div>
             </div>
-            <div className='tag'>
-            <div className='tags'>
+            <div className='tagq'>
+            <div className='tagsq'>
             <h5>Tags</h5>
             <h6>Add up to 5 tags to describe what your question is about. Start typing to see suggestions.</h6>
             <TagsInput  value={tags} 

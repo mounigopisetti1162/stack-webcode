@@ -311,14 +311,11 @@ cursor: pointer;
   font-size: larger;
   color: #040405 ;
 }
-.tag{
-  margin: 10px 5px;
-  padding: 5px 10px;
-  background-color: hsl(205deg 46% 92%);
-  color: hsl(205deg 47% 42%);
-}
+
 .accountname{
 display: flex;
+
+
 flex-direction: column;
 
 } 
@@ -334,4 +331,23 @@ flex-direction: column;
 }
 .author-details >p:hover{
   color: rgb(105, 188, 247);
+}
+
+.tags{
+  display: flex;
+  flex-direction: row !important;
+  margin: 10px 5px;
+  padding: 5px 10px;
+  align-items: end !important;
+  justify-content: flex-start !important;
+
+
+}
+.tags >div{
+  display: flex;
+  flex-direction: row !important;
+  background-color: hsl(205deg 46% 92%);
+  padding: 5px;
+  margin: 5px;
+  border-radius: 40%;
 }

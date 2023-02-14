@@ -31,7 +31,11 @@ function Allquestions({data}) {
           >
             <div>{parse(truncate(data.body, 200))}</div>
           </div>
-              {data.tags.map((e)=><p>{e}</p>)}
+        
+        <div className='tags'>{data.tags.map((e)=><div>{e}</div>)}
+        </div> 
+         
+              
               
                 
             

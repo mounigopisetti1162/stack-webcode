@@ -7,7 +7,7 @@ import * as dotenv from 'dotenv'
 import bcrypt from 'bcrypt'
 import jwt  from "jsonwebtoken";
 import nodemailer from 'nodemailer'
-import { getuser1, addnewuser, getuser, getuserbyid, updatepass } from "./router/usersRouter.js";
+import { getuser1, addnewuser, getuser, getuserbyid, updatepass, getusertoken, getuserbytoken } from "./router/usersRouter.js";
 export const app=express()
 dotenv.config()
 const PORT=process.env.PORT||4000
@@ -68,6 +68,7 @@ app.get('/user',async function(request,responce)
 
 app.post('/user',async function(req,res)
 {
+  console.log("first")
     const {firstname,lastname,email,password}=req.body;
     const hashpassword=await generatehashedpassword(password)
       //  db.movies.insertMany(data)
@@ -138,36 +139,48 @@ app.post('/login', async function (request, responce) {
 
     const usernamefound=await getuser(email)
     console.log(usernamefound)
-  
+  const id=usernamefound._id
+  console.log(id)
     if(!usernamefound)
-    {
+    { 
   responce.send({message:'username not found'})
     }
     else{
         console.log('password')
   const pass=await bcrypt.compare(password,usernamefound.password)
+  console.log(pass)
   if(pass)
   {
     // const roleId=usernamefound.roleId
     // console.log(roleId)
+    console.log("inside pas")
     const token=jwt.sign({id:usernamefound._id},process.env.SCRETE_TOKEN)
+    const update=await getusertoken(id,token)
+    console.log(update)
     responce.status(200).send({message:"logged in sucessfully",token:token})
   }
   else{
+    console.log("incalin")
     responce.send({message:'invalid credentials'})
   }
   console.log(password)
-  console.log(pass)
+  // console.log(pass)
     }
   
   });
 
 
 
-  app.post('/askquestion',async function(request,responce)
+  app.post('/askquestion/:token',async function(request,responce)
   {
     const {title,body,tags}=request.body;
-    const question= await client.db('stack').collection('questions').insertOne({title:title,body:body,tags:tags})
+    const {token}=request.params
+    const user=await getuserbytoken(token)
+    const name=user.firstname
+    console.log(token)
+    console.log(name)
+    const question= await client.db('stack').collection('questions').insertOne({title:title,body:body,tags:tags,name:name})
+    console.log(question)
     responce.send(question)
 
   })
@@ -195,13 +208,20 @@ const question=await client.db('stack').collection('questions').findOne({_id:Obj
 responce.send(question)
 })
 
+app.get('/answer',async function(request,responce)
+{
+  // const {question_id,answer}=request.body;
+  console.log("answesss")
+  const answers= await client.db('stack').collection('answers').find({}).toArray()
+  responce.send(answers)
+})
 
 app.post('/answer'),async function(request,responce)
 {
   const {question_id,answer}=request.body;
   console.log("answesss")
-  const question= await client.db('stack').collection('answers').insertOne({question_id:question_id,answer:answer})
-  responce.send(question)
+  const answers= await client.db('stack').collection('answers').insertOne({question_id:question_id,answer:answer})
+  responce.send(answers)
 }
 
 app.post('/comments/:id'),async function(request,responce)

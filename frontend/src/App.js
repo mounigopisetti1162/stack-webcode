@@ -5,11 +5,13 @@ import Sidebar from './compo/main/Sidebar';
 import Page from './compo/main/Page';
 import { Route, Router, Routes } from 'react-router-dom';
 import Askquestion from './compo/createquestion/Askquestion';
-import Login from './compo/login/login';
-import Signup from './compo/login/signup';
+// import Login from './compo/login/login';
+// import Signup from './compo/login/signup';
 import Form from './compo/login/Form';
 import MainQuestion from './compo/viewquestion/MainQuestion';
 import Index from './compo/viewquestion';
+import Signup from './compo/login/signup2';
+import Login from './compo/login/login2';
 
 function App() {
   return (

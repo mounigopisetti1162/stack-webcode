@@ -7,6 +7,7 @@ function Allquestions({data}) {
         return str?.length > n ? str.substr(0, n - 1) + "..." : str;
       }
       let tags = data.tags[0];
+      console.log(data)
 
   return (
     <div className='single-questions'>
@@ -43,7 +44,7 @@ function Allquestions({data}) {
                 <div className='accountname'> 
                 <div className='author-details'>
                     <AccountCircleIcon/>
-                    <p>Username</p></div></div>
+                    <p>{data.name}</p></div></div>
 
                 
 

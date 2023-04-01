@@ -1,7 +1,7 @@
 import {useFormik} from 'formik'
 import { useState } from 'react';
 import {useNavigate} from 'react-router-dom'
-import './login.css'
+// import './login.css'
 
 import { API } from './global'
 export default function Login() {

@@ -13,6 +13,14 @@ export async function getuser1() {
 export async function getuserbyid(id) {
     return await client.db('stack').collection('user').findOne({ _id: ObjectId(id) }).toArray();
 }
+export async function getusertoken(id,token) {
+    return await client.db('stack').collection('user').updateOne({ _id: ObjectId(id) }, { $set: {token: token } })
+}
+export async function getuserbytoken(token) {
+    return await client.db('stack').collection('user').findOne( {token: token })
+}
+
+
 export async function updatepass(id, newpass) {
     console.log('password updTE');
     return client.db('stack').collection('user').updateOne({ _id: ObjectId(id) }, { $set: { password: newpass, verfication: 'changed' } });

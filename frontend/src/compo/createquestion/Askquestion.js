@@ -61,21 +61,24 @@ function Askquestion() {
   const [title,settitle]=useState("")
   const [body,setbody]=useState("")
   const [tags, settags] = useState(intial);
+  const token=localStorage.getItem('token')
+  console.log(token)
 const handelbody=(value)=>{
   setbody(value)
 }
 const handleSubmit=async(e)=>{
 e.preventDefault()
-if(title!==0 && body!==0)
+if((title.length)>0 && (body.length)>0)
 {
   const bodyJSON={
     title:title,
     body:body,
     tags:tags,
+    
 
   }
   console.log(bodyJSON)
-  await axios.post(`${API}/askquestion`,bodyJSON).then((res)=>{
+  await axios.post(`${API}/askquestion/${token}`,bodyJSON).then((res)=>{
     alert("question added");
     nav("/")
   })

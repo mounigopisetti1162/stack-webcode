@@ -58,7 +58,7 @@ function MainQuestion() {
   ];
 
   const {id}=useParams()
-  console.log(id)
+  // console.log(id)
   
   // let search = window.location.search;
   // console.log("search")
@@ -73,9 +73,11 @@ const intial={
 }
   const [questionData, setQuestionData] = useState(intial);
   const [answer, setAnswer] = useState("");
+  const [answers, setAnswers] = useState([]);
   const [show, setShow] = useState(false);
-  const [comment, setComment] = useState("");
-console.log(questionData)
+  const [comment, setComment] = useState(""); 
+  const [comments, setComments] = useState([]); 
+// console.log(comments)
   function handleQuill(value) {
     setAnswer(value);
   }
@@ -84,7 +86,7 @@ console.log(questionData)
     .then((data)=> data.json())
     .then((res) =>{
       setQuestionData(res)
-      console.log(res)
+      // console.log(res)
     })
     .catch((err) => console.log(err));
   }
@@ -94,17 +96,28 @@ console.log(questionData)
         // .get(`${API}/askquestion/${id}`)
         // .then((res) => setQuestionData(res.data[0]))
         // .catch((err) => console.log(err));
-  
-    getFunctionDetails();
+        getFunctionDetails()
+        getUpdatedAnswer();
+        getAnswer()
+        
   }, []);
 
   async function getUpdatedAnswer() {
+    // console.log(id)
     await axios
-      .get(`${API}/questionview/${id}`)
-      .then((res) => setQuestionData(res.data[0]))
+      .get(`${API}/comment/${id}`)
+      .then((res) => {setComments(res.data)
+      console.log(res.data.comment)})
       .catch((err) => console.log(err));
   }
+  async function getAnswer() {
+    await axios
+      .get(`${API}/answer/${id}`)
+      .then((res) => {setAnswers(res.data)
+      console.log(res.data)})
+      .catch((err) => console.log(err))
 
+  }
   const handleSubmit = async () => {
     const body = {
       question_id: id,
@@ -118,15 +131,15 @@ console.log(questionData)
     };
 
     await axios
-      .post(`${API}/answer`, body, config)
+      .post(`${API}/answer/${id}`, body, config)
       .then(() => {
         alert("Answer added successfully");
         setAnswer("");
-        getUpdatedAnswer();
+        getAnswer();
       })
       .catch((err) => console.log(err));
   };
-console.log(show)
+// console.log(show)
   const handleComment = async () => {
     if (comment !== "") {
       const body = {
@@ -143,7 +156,7 @@ console.log(show)
     }
 
   }
-console.log(questionData.title)
+console.log(answers.length)
   return (
     <div className="main">
         {questionData ===""?<h2>Loading...</h2>:
@@ -151,8 +164,8 @@ console.log(questionData.title)
       <div className="main-container">
         <div className="main-top">
           <h2 className="main-question">{questionData?.title} </h2>
-          <Link to="/ask-question">
-            <button>Ask Question</button>
+          <Link to="/askquestion">
+            <button className="ask-question">Ask Question</button>
           </Link>
           
         </div>
@@ -182,9 +195,10 @@ console.log(questionData.title)
 
                 
               </div>
+              <p>{parse(questionData?.body)}</p>
+
             </div>
             <div className="question-answer">
-              <p>{parse(questionData?.body)}</p>
 
               <div className="author">
                 
@@ -192,21 +206,21 @@ console.log(questionData.title)
               </div>
               <div className="comments">
                 <div className="comment">
-                  {questionData?.comments &&
-                    questionData?.comments.map((_qd) => (
+                  {
+                   comments ? comments.map((_qd) => (
                       <p key={_qd?._id}>
                         {_qd.comment}{" "}
                         <span>
-                          - {_qd.user ? _qd.user.displayName : "Nate Eldredge"}
+                           {_qd.name ? _qd.name : " "}
                         </span>{" "}
                         {"    "}
                         <small>
-                          {new Date(_qd.created_at).toLocaleString()}
-                        </small>
+                          {new Date(_qd.createdAt).toLocaleString()}
+                        </small> 
                       </p>
-                    ))}
+                    )) :" "}
                 </div> 
-                 <p onClick={() => setShow(!show)}>Add a comment</p> 
+                 <p className="add-comment" onClick={() => setShow(!show)}>Add a comment  -onclick</p> 
                 {show && (
                   <div className="title">
                     <textarea
@@ -216,6 +230,7 @@ console.log(questionData.title)
                         border: "1px solid rgba(0, 0, 0, 0.2)",
                         borderRadius: "3px",
                         outline: "none",
+                        width:"700px"
                       }}
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
@@ -233,6 +248,7 @@ console.log(questionData.title)
                     </button>
                   </div>
                 )}
+                <span>{answers.length}ANSWES</span>
               </div>
             </div>
           </div>
@@ -252,44 +268,50 @@ console.log(questionData.title)
           >
             {/* {questionData && questionData?.answerDetails.length} Answers */}
           </p>
-          {/* {questionData?.answerDetails.map((_q) => (
+          {answers.map((_q) => (
             <>
+            <hr></hr>
               <div
                 style={{
                   borderBottom: "1px solid #eee",
                 }}
                 key={_q._id}
-                className="all-questions-container"
+                className="all-questions-containers"
               >
-                <div className="all-questions-left">
+                <div className="all-questions-lefts">
                   <div className="all-options">
                     <p className="arrow">▲</p>
 
                     <p className="arrow">0</p>
 
                     <p className="arrow">▼</p>
+                    </div>
+                    <div>
+                    {parse(_q.answer)}
+                    </div>
 
                     
-                  </div>
+                 
                 </div>
                 <div className="question-answer">
-                  {parse(_q.answer)}
+
+                  
                   <div className="author">
                     <small>
-                      asked {new Date(_q.created_at).toLocaleString()}
+                      {/* asked {new Date(_q.created_at).toLocaleString()} */}
                     </small>
                     <div className="auth-details">
-                      <p>
+                      {/* <p>
                         {_q?.user?.displayName
                           ? _q?.user?.displayName
                           : "Natalia lee"}
-                      </p>
+                      </p> */}
                     </div>
                   </div>
                 </div>
               </div>
             </>
-          ))} */}
+          ))} 
         </div>
        
       </div>
@@ -314,15 +336,15 @@ console.log(questionData.title)
           }}
         />
       </div>
+      <br></br>
+      <br></br>
       <button
         onClick={handleSubmit}
-        style={{
-          marginTop: "100px",
-          maxWidth: "fit-content",
-        }}
+        
       >
-        Post your answer
+       post the answer
       </button>
+      
       </div>
 }
     </div>

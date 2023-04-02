@@ -6,7 +6,7 @@ function Allquestions({data}) {
     function truncate(str, n) {
         return str?.length > n ? str.substr(0, n - 1) + "..." : str;
       }
-      let tags = data.tags[0];
+      // let tags = data.tags[0];
       console.log(data)
 
   return (

@@ -204,33 +204,48 @@ app.post('/login', async function (request, responce) {
   {
 const {id}=request.params
 console.log(id)
-const question=await client.db('stack').collection('questions').findOne({_id:ObjectId(id)})
+const question=await questionid(id)
 responce.send(question)
 })
 
-app.get('/answer',async function(request,responce)
+app.get('/answer/:id',async function(request,responce)
 {
   // const {question_id,answer}=request.body;
+  const {id}=request.params
   console.log("answesss")
-  const answers= await client.db('stack').collection('answers').find({}).toArray()
+  const answers= await client.db('stack').collection('answers').find({question_id:id}).toArray()
   responce.send(answers)
 })
 
-app.post('/answer'),async function(request,responce)
+app.post('/answer/:id',async function(request,responce)
 {
   const {question_id,answer}=request.body;
-  console.log("answesss")
+  console.log(answer)
   const answers= await client.db('stack').collection('answers').insertOne({question_id:question_id,answer:answer})
+  console.log(answers)
   responce.send(answers)
-}
+})
 
-app.post('/comments/:id'),async function(request,responce)
+app.post('/comment/:id',async function(request,responce)
 {
     const {id}=request.params
   const {question_id,comment}=request.body;
-  const question= await client.db('stack').collection('comments').insertOne({question_id:question_id,comment:comment})
+  const name=await questionid(id)
+  console.log(name.name)
+  const question= await client.db('stack').collection('comments').insertOne({question_id:question_id,comment:comment,createdAt:Date.now(),name:name.name})
+  console.log(question)
   responce.send(question)
-}
+})
+
+app.get('/comment/:id',async function(request,responce)
+{
+  const {id}=request.params
+  console.log(id)
+  const comments=await client.db('stack').collection('comments').find({question_id:id}).toArray()
+  // console.log("comments")
+  // console.log(comments)
+  responce.send(comments)
+})
 
 app.listen(PORT,()=>console.log(`server ${PORT}`))
 export {client}
@@ -238,4 +253,8 @@ export {client}
 
 
 
+
+function questionid(id) {
+  return client.db('stack').collection('questions').findOne({ _id: ObjectId(id) });
+}
 

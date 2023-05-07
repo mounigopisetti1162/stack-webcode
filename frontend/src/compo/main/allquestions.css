@@ -1,0 +1,36 @@
+@media all and (max-width:900px)  {
+
+.options{
+    display: flex;
+flex-direction: row;
+gap: 10px;
+
+}
+.single-question-container{
+    display: flex;
+    flex-direction: column;
+    /* background-color: aqua !important; */
+
+}
+.single-question-left{
+    display: flex;
+    flex-direction: column;
+    /* background-color: aqua !important; */
+}
+.single-question-middle{
+    /* background-color: yellowgreen; */
+}
+}
+.accountname{
+    /* font-size: 20px; */
+    /* background-color: yellowgreen; */
+    display: flex;
+    flex-direction: column;
+}
+.tags{
+    /* background-color: yellow; */
+    padding: 0px;
+}
+.body{
+    background-color: violet;
+}

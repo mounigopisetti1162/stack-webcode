@@ -86,7 +86,7 @@ if((title.length)>0 && (body.length)>0)
 
 
 }  
-console.log(tags)
+// console.log(tags)
   return (
     <div className='askquestion-page'>
       <div className='page-container'>

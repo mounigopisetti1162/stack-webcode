@@ -269,7 +269,7 @@ cursor: pointer;
   display: flex;
   flex-direction:row ;
   /* justify-content: space-between; */
-  gap: 50px;
+  gap: 10px;
   width:100%
 }
 .single-question-left{
@@ -314,7 +314,8 @@ cursor: pointer;
 
 .accountname{
 display: flex;
-
+align-items: center;
+justify-content: center;
 
 flex-direction: column;
 

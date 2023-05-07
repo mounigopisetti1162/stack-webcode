@@ -176,10 +176,11 @@ app.post('/login', async function (request, responce) {
     const {title,body,tags}=request.body;
     const {token}=request.params
     const user=await getuserbytoken(token)
-    const name=user.firstname
+    // const name=user.firstname
     console.log(token)
-    console.log(name)
-    const question= await client.db('stack').collection('questions').insertOne({title:title,body:body,tags:tags,name:name})
+    // console.log(name)
+    const question= await client.db('stack').collection('questions').insertOne({title:title,body:body,tags:tags,name:user.firstname,createdAt: Date.now()})
+    console.log("first")
     console.log(question)
     responce.send(question)
 
@@ -214,14 +215,17 @@ app.get('/answer/:id',async function(request,responce)
   const {id}=request.params
   console.log("answesss")
   const answers= await client.db('stack').collection('answers').find({question_id:id}).toArray()
+  // console.log(answers)
   responce.send(answers)
 })
 
 app.post('/answer/:id',async function(request,responce)
 {
-  const {question_id,answer}=request.body;
+  const {question_id,answer,token}=request.body;
   console.log(answer)
-  const answers= await client.db('stack').collection('answers').insertOne({question_id:question_id,answer:answer})
+  const name=await getuserbytoken(token)
+  console.log(name.name)
+  const answers= await client.db('stack').collection('answers').insertOne({question_id:question_id,answer:answer,createdAt:Date.now(),name:name.firstname})
   console.log(answers)
   responce.send(answers)
 })
@@ -229,10 +233,10 @@ app.post('/answer/:id',async function(request,responce)
 app.post('/comment/:id',async function(request,responce)
 {
     const {id}=request.params
-  const {question_id,comment}=request.body;
-  const name=await questionid(id)
+  const {question_id,comment,token}=request.body;
+  const name=await getuserbytoken(token)
   console.log(name.name)
-  const question= await client.db('stack').collection('comments').insertOne({question_id:question_id,comment:comment,createdAt:Date.now(),name:name.name})
+  const question= await client.db('stack').collection('comments').insertOne({question_id:question_id,comment:comment,createdAt:Date.now(),name:name.firstname})
   console.log(question)
   responce.send(question)
 })

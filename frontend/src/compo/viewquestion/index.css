@@ -21,13 +21,20 @@
   
   .arrow {
     font-size: 2rem;
-    color: rgba(0, 0, 0, 0.25);
+    color: rgba(0, 0, 0, 0.35);
   }
-  
+  .all-options{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
   .all-options > .MuiSvgIcon-root {
     color: rgba(0, 0, 0, 0.25);
     font-size: large;
     margin: 5px 0;
+    align-items: center;
+    justify-content: center;
   }
   
   /* .ql-syntax {
@@ -48,6 +55,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    /* justify-content: center; */
     gap: 10px;
   }
   .all-questions-containers{
@@ -64,6 +72,11 @@
   }
   .all-questions-left p{
     align-items: center;
+  }
+  .answers{
+    font-size: 20px;
+    font-weight: 450;
+    color: black;
   }
   .add-comment{
     font-size: 25px;
@@ -116,4 +129,13 @@
   }
   .comment small{
     font-size: 15px;
+  }
+  .nameof{
+    align-items: flex-end;
+    font-size: 11px;
+  }
+  .author-details{
+    align-items: flex-end !important;
+    justify-content: flex-end !important;
+    width: 100%;
   }

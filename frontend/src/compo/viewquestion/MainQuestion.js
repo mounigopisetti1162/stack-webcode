@@ -9,6 +9,7 @@ import parse from 'html-react-parser';
 import { Link, useParams } from "react-router-dom";
 import { API } from "../login/global";
 import "./index.css";
+import { getans } from "../axios/axios";
 
 function MainQuestion() {
   var toolbarOptions = [
@@ -77,7 +78,7 @@ const intial={
   const [show, setShow] = useState(false);
   const [comment, setComment] = useState(""); 
   const [comments, setComments] = useState([]); 
-// console.log(comments)
+console.log(id)
   function handleQuill(value) {
     setAnswer(value);
   }
@@ -110,18 +111,20 @@ const intial={
       console.log(res.data.comment)})
       .catch((err) => console.log(err));
   }
+  
   async function getAnswer() {
-    await axios
-      .get(`${API}/answer/${id}`)
+    await getans(id)
       .then((res) => {setAnswers(res.data)
       console.log(res.data)})
       .catch((err) => console.log(err))
 
   }
+  const token=localStorage.getItem("token")
   const handleSubmit = async () => {
     const body = {
       question_id: id,
       answer: answer,
+      token:token
       
     };
     const config = {
@@ -145,6 +148,7 @@ const intial={
       const body = {
         question_id: id,
         comment: comment,
+        token:token
         
       };
       await axios.post(`${API}/comment/${id}`, body).then((res) => {
@@ -173,7 +177,7 @@ console.log(answers.length)
           <div className="info">
             <p>
               Asked
-              {/* <span>{new Date(questionData?.created_at).toLocaleString()}</span> */}
+              <span>{new Date(questionData?.createdAt).toLocaleString()}</span>
             </p>
             <p>
               Active<span>today</span>
@@ -194,8 +198,9 @@ console.log(answers.length)
                 <p className="arrow">▼</p>
 
                 
-              </div>
-              <p>{parse(questionData?.body)}</p>
+              </div >
+
+              <p className="answer">{parse(questionData?.body)}</p>
 
             </div>
             <div className="question-answer">
@@ -248,7 +253,7 @@ console.log(answers.length)
                     </button>
                   </div>
                 )}
-                <span>{answers.length}ANSWES</span>
+                <span>{answers.length} ANSWERS</span>
               </div>
             </div>
           </div>
@@ -286,29 +291,38 @@ console.log(answers.length)
 
                     <p className="arrow">▼</p>
                     </div>
-                    <div>
+                    <div className="answers">
+                      <div className="question-answer">
+
+
                     {parse(_q.answer)}
-                    </div>
+                      </div>
+                    
+                        <div className='single-question-right'>
+                <div className='accountname'> 
+                <div className='author-details'>
+                    {/* <AccountCircleIcon/> */}
+                    
+                    <p className="nameof">{_q.name}</p>
+                    <span className="nameof"> asked {new Date(_q.createdAt).toLocaleString()}
+                    </span>
+                    </div></div>
+
+                
+
+            </div>
+            </div>
+
+
+
+                  
 
                     
                  
                 </div>
-                <div className="question-answer">
-
+               
                   
-                  <div className="author">
-                    <small>
-                      {/* asked {new Date(_q.created_at).toLocaleString()} */}
-                    </small>
-                    <div className="auth-details">
-                      {/* <p>
-                        {_q?.user?.displayName
-                          ? _q?.user?.displayName
-                          : "Natalia lee"}
-                      </p> */}
-                    </div>
-                  </div>
-                </div>
+                 
               </div>
             </>
           ))} 

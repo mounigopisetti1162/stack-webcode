@@ -11,7 +11,7 @@ import './login.css'
 import { API } from './global'
 export default function Login() {
 
-  const [status,setstatus]=useState('Submit')
+  const [status,setstatus]=useState('Log in')
   const navigate=useNavigate()
 
   const validationSchema = Yup.object().shape({
@@ -80,14 +80,28 @@ const renderError = (message) => <p className="help is-danger">{message}</p>;
   return(
   <>
   <div className="sign1">
+    
     <div className="signup1">
+    
       <div className="signwrapper1">
-<div className="signup-11">
-<h3 className="loginLogo1">InFiChat</h3>
-{/* <img className="loginimage" src='  https://media.tenor.com/6pBm1sGCTnAAAAAM/excited-pikachu.gif
-' alt='name'/> */}
-      </div>
-      <div className="signup-21"></div>
+      <div className='icons'>
+<Link to="/">
+
+
+<img src="stackicon.png" alt='stackover' className='stackicon'/>
+</Link>
+
+</div>
+<div className="google2">
+  <label className="glabel"><img src="google.jpeg" className="gg"></img> Log in with Google </label>
+  
+</div>
+<div className="git2">
+  <label className="glabel2"><img src="git.webp" className="gg"></img> Log in with Github </label>
+  
+</div>
+
+    
  <Formik
     initialValues={initialValues}
     validationSchema={validationSchema}
@@ -96,7 +110,7 @@ const renderError = (message) => <p className="help is-danger">{message}</p>;
       // console.log(values)
     }}
   >
-    <div>
+    <div className='forms'>
       <Form>
         <div
           className="container1"
@@ -106,46 +120,66 @@ const renderError = (message) => <p className="help is-danger">{message}</p>;
         >
            <div className="field1">
             <label className="label1" htmlFor="email">
-              Email Address
+              Email
             </label>
             <div className="control1">
               <Field
                 name="email"
                 type="text"
                 className="input"
-                placeholder="Email address"
+               
               />
+          
               <ErrorMessage name="email" render={renderError} />
             </div>
           </div>
           <div className="field1">
-            <label className="label1" htmlFor="password">
+          <label className="label1" htmlFor="password">
+          
+<div className='label'>
+
+
+
+            <div className='labels'>
+
+  
               Password
+</div>
+              <div className='forgotpass'>
+
+<Link to='/user/reset-password' className='forgot'>Forgot Password?</Link>
+  </div>
+  
+            </div>
             </label>
             <div className="control1">
               <Field
                 name="password"
                 type="password"
                 className="input"
-                placeholder="password"
+               
               />
               <ErrorMessage name="password" render={renderError} />
             </div>
           </div>
           
       
-          <button type="submit" className="btn btn-primary" 
+          <button type="submit" className="btn btn-primary btns" 
           >
             {status}
           </button>
           <br></br>
-        <Link to='/signup'>No Account</Link>
+       
         <br></br>
         <br></br>
-        <Link to='/user/reset-password'>Forgot Password</Link>
-
+       
         </div>
       </Form>
+      <label className='nolabel'>
+        Don't have an account?
+
+      <Link to='/signup' className='noaccount'> Sign up</Link>
+      </label>
       </div>
       
       </Formik>

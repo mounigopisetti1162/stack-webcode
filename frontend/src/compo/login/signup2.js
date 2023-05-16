@@ -6,20 +6,19 @@ import * as Yup from "yup";
 import { signuppost } from "../axios/axios";
 // import { signuppost } from "../chatting/axios/axios";
 import Resizer from "./Resizer";
-// import './signup.css';
+import './signup.css';
 const Signup = () => {
 
-  const [status,setstatus]=useState('Submit')
+  const [status,setstatus]=useState('Sign Up')
   const navigate=useNavigate()
   const [iteam,setiteam]=useState()
 // validations of the form
   const validationSchema = Yup.object().shape({
-    firstname: Yup.string().required("name is mandatary"),
+    displayname: Yup.string().required("name is mandatary"),
     email: Yup.string().email().required(),
-    lastname: Yup.string().required(),
+    
     password: Yup.string().min(3).max(50).required(),
-    confrimpassword: Yup.string().oneOf([Yup.ref("password"), null], "Password must match")
-    ,
+ 
     profile: Yup
       .string()
       .min(10),
@@ -29,17 +28,17 @@ const [image,setimage]=useState({myfile:""})
 
   const initialValues = {
 
-    firstname: "",
-    lastname: "",
+   displayname:"",
+   
     email: "",
     password: "",
-    confrimpassword: "",
+   
     profile:''
 
   };
 
 
-  // console.log("image")
+ 
 
 
 
@@ -49,16 +48,12 @@ const handelfileupload= async (e)=>{
     const file = e.target.files[0];
     const image = resizeFile(file);
     image.then((data)=>data).then(data=>setimage({myfile:data}))
-    //   function (value) {myimage(value)}
-    // )
-    // setimage({myfile:image})
-    // console.log(image);
+  
   } catch (err) {
-    // console.log(err);
+    
   }
 }
-// console.log(image)
-// console.log(image.myfile[0])
+
 
 
 const resizeFile = (file) =>
@@ -78,14 +73,10 @@ const resizeFile = (file) =>
   });
   const onSubmit = (values) => {
 
-    // console.log("submited")
+   
       setstatus('loding..') 
-      // console.log(values)
-      // console.log(image)
-
-      
-      
-      const data={  firstname:values.firstname,email:values.email,lastname:values.lastname,password:values.password,confrimpassword:values.confrimpassword,profile:image
+    
+      const data={  firstname:values.firstname,email:values.email,password:values.password,profile:image
       }
       // console.log(data)
       //axios calling
@@ -100,17 +91,14 @@ const resizeFile = (file) =>
     }
     setstatus("submited");
     navigate("/login")
-    // console.log(data.profile.myfile.Promise)
-
+   
     toast("verify- Mail has been sent")    
-    //adding token to the local storage
-    // localStorage.setItem('token',data.token);
-    })
+      })
     .catch((err)=>{
       toast("username alredy exist")
     })
     }
-  //change the color
+ 
     const renderError = (message) => <p className="help is-danger">{message}</p>;
 
 
@@ -119,11 +107,19 @@ const resizeFile = (file) =>
     {/* <h1>sign up page</h1> */}
     <div className="sign">
     <div className="signup">
+    
       <div className="signwrapper">
-<div className="signup-1">
-<h3 className="loginLogo">InFiChat</h3>
-<img className="loginimage" src='https://cdn.dribbble.com/users/1894420/screenshots/11700268/online-video-chat.gif' alt='name'/>
-      </div>
+        <div className="signupcontent">
+      <label className="signupcontent2">  Create your Stack Overflow account. It's free and only takes a minute.
+      </label> </div>
+<div className="google">
+  <label className="glabel"><img src="google.jpeg" className="gg"></img> Sign up with Google </label>
+  
+</div>
+<div className="git">
+  <label className="glabel2"><img src="git.webp" className="gg"></img> Log in with Github </label>
+  
+</div>
       <div className="signup-2">
       <Formik
     initialValues={initialValues}
@@ -133,29 +129,29 @@ const resizeFile = (file) =>
       // console.log(values)
     }}>
 
-    <div className="form">
+    <div className="form3">
       <Form className="form-0">
         <div
           className="container"
           style={{
-            width: "60%",
+            width: "100%",
           }}
         >
 <div className="form-1">
   <div className="form-2">
           <div className="field">
-            <label className="label" htmlFor="firstname">
-              First Name
+            <label className="label" htmlFor="displayname">
+              Display Name
             </label>
             <div className="control">
               <Field
-                name="firstname"
+                name="displayname"
                 type="text"
                 className="input"
-                placeholder="Name"
+               
                
               />
-              <ErrorMessage name="firstname" render={renderError} />
+              <ErrorMessage name="displayname" render={renderError} />
             </div>
           </div>
           
@@ -169,25 +165,9 @@ const resizeFile = (file) =>
                 name="email"
                 type="text"
                 className="input"
-                placeholder="Email address"
+               
               />
               <ErrorMessage name="email" render={renderError} />
-            </div>
-          </div>
-
-
-          <div className="field">
-            <label className="label" htmlFor="lastname">
-            Last Name
-            </label>
-            <div className="control">
-              <Field
-                name="lastname"
-                type="text"
-                className="input"
-                placeholder="Last Name"
-              />
-              <ErrorMessage name="lastname" render={renderError} />
             </div>
           </div>
       
@@ -201,35 +181,26 @@ const resizeFile = (file) =>
                 name="password"
                 type="password"
                 className="input"
-                placeholder="Password"
+               
               />
               <ErrorMessage name="password" render={renderError} />
+          
             </div>
+            <label className="passwordlabel">
+              Passwords must contain at least eight characters, including at least 1 letter and 1 number.
+
+              </label>
           </div>
 
 
-          <div className="field">
-            <label className="label" htmlFor="confrimpassword">
-             Confrim Password
-            </label>
-            <div className="control">
-              <Field
-                name="Confrim Password"
-                type="password"
-                className="input"
-                placeholder="confrimpassword"
-              />
-              <ErrorMessage name="confrimpassword" render={renderError} />
-            </div>
-          </div>
+        
 
           <div className="field">
             <label className="label" htmlFor="confrimpassword">
              Profile Picture
             </label>
             <div className="control">
-              <img src="/images/person/no-avatar.png" alt='' className="signup-img"/>
-             <input
+                  <input
              name="profile"
              type="file"
             //  type="text"
@@ -238,24 +209,20 @@ const resizeFile = (file) =>
              accept=".jpeg,.png,.jpg"
              placeholder="profile"
              onChange={(e)=>handelfileupload(e)}/>
-                   {/* <Field
-                name="profile"
-                type="text"
-                className="input"
-                placeholder="profile"
-                values={iteam}
-              /> */}
+                   
               <ErrorMessage name="profile" render={renderError} />
             </div>
           </div>
           
 
 
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary submit">
            {status}
           </button>
 <br></br>
-        <Link to='/login'>Alredy had an account</Link>
+<label className="passwordlabel">
+By clicking “Sign up”, you agree to our terms of service, privacy policy and cookie policy
+</label>
  </div>
 </div>
         </div>
@@ -265,6 +232,7 @@ const resizeFile = (file) =>
 
       </Formik>
       </div>
+       <label className="account">Alredy had an account? <Link to='/login' className="login">log in</Link></label>
     </div>
     </div>
     </div>

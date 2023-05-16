@@ -36,13 +36,13 @@ function Allquestions({data}) {
             </div>
             <div className='single-question-middle'>
                 <div className='asked-question'><Link to={`/questionview/${data?._id}`}>{data.title}</Link> </div>
-                {/* <div
+                <div
             style={{
               maxWidth: "90%",
             }}
-          > */}
-            {/* <div className='body'>{parse(truncate(data.body, 200))}</div> */}
-          {/* </div> */}
+          > 
+             <div className='body'>{parse(truncate(data.body, 200))}</div> 
+           </div>
         
         <div className='tags'>{data.tags.map((e)=><div>{e}</div>)}
         </div> 

@@ -1,0 +1,189 @@
+header{
+    display: flex;
+    position: sticky !important;
+    width: 100%;
+    /* min-height: 4vh !important; */
+    background-color: #ffffff;
+    /* margin-left: 5px !important; */
+    /* margin-right:5px !important ; */
+    /* align-items: center; */
+    z-index: 1000;
+    /* justify-content: center; */
+    align-items: center !important;
+  }
+  .three_lines{
+    margin-right: 15px !important;
+  }
+  .header-bar{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    border-radius: 10px;
+    align-items: center !important;
+    justify-content: center;
+    gap: 20px;
+    height: 7vh;
+    /* height: 100% !important; */
+    box-shadow: 0px 1px 0px 1px rgba(53, 51, 51, 0.178) ;
+  }
+  .threeline{
+    margin-left: 10px;
+  }
+  .header-buttons{
+    /* background-color: #4CAF50 !important; Green */
+    border: none !important;
+    /* color: white !important; */
+    padding: 5px 10px !important;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block !important;
+    font-size: 10px !important;
+  }
+  .stack_icon{
+    width:100px;
+    height: fit-content !important;
+    margin-right: 10px;
+    
+  }
+  .stack{
+    width: 100px;
+    height: 9vh !important;
+    object-fit: contain ;
+    cursor: pointer;
+    /* background-color: aqua; */
+    margin-left: 20px;
+  
+  transform: scale(1.5);
+  /* box-shadow:0px 1px 0px 1px rgba(53, 51, 51, 0.178) ; */
+  }
+  .stack:hover{
+    background-color: #ddd;
+    height: 4vh !important;
+  color:#ddd;
+  
+    /* height: 4vh !important; */
+  }
+  .about:hover,.products:hover,.for_team:hover,.three_lines:hover{
+    background-color: #ddd;
+    cursor: pointer;
+    /* height: 35px; */
+    
+  }
+  .stack:hover{
+    cursor: pointer;
+  }
+  .about,.products,.for_team{
+    width: 75px;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center;
+    margin-left: 15px;
+    height: 40px;
+    padding: 10px 15px 10px 9px;
+    border-radius: 33px;
+    font-weight: 400;
+    font-size:13px;
+    color: #767678;
+    /* background-color: aquamarine; */
+  }
+  /* hr{
+    width: 100px !important;
+    color: yellowgreen;
+    font-size: large;
+  } */
+  .search_bar:hover{
+    border-color: rgb(120, 205, 245);
+    box-shadow:2px 1px 5px 2px rgba(131, 214, 232, 0.907) ; 
+  
+  }
+  .for_team{
+    width: 90px;
+  }
+  .search_bar{
+  display: flex;
+  align-items: center;
+    border-radius: 1px !important;
+    border: 1px solid rgba(0, 0, 0, 0.178);
+    font: 100;
+    /* background-color: #040405; */
+    /* max-width: fit-content; */
+    height: 35px;
+    /* width: 500px !important; */
+  
+    /* background-color: #040405; */
+  }
+  .search{
+    font-weight: 100px;
+    font-size: 13px!important;
+    border: none !important;
+    outline: none;
+    height: 2vh !important;
+    /* width: 12px !important; */
+    /* width: 100% !important; */
+  }
+  .content
+  {
+    display: flex;
+    margin-right: 0px;
+  }
+  .buttons{
+    margin-top: 0px !important;
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    justify-content: center;
+  }
+  .logins{
+    font-size: 10px !important;
+    border: blue;
+    background-color:hsl(206,96%,90%) !important;
+    color: #ffffff;
+    width: 70px;
+    height: 30px;
+    flex: 2;
+  }
+  
+  @media screen and (max-width:831px) {
+    .about{
+      display: none;
+    }
+    .for_team{
+      display: none;
+    }
+    .stack_icon{
+      margin-right: 20px;
+    }
+    .header-bar{
+      align-items: center;
+      /* justify-content: center; */
+    }
+    .search_bar{
+     
+      /* background-color: aqua !important; */
+    }
+    .search{
+      width: calc(20*1vw) !important;
+    }
+  }
+  @media screen and (max-width:1288px) {
+    .search_bar{
+     
+      /* background-color: blue !important; */
+    }
+    .search{
+      /* width: 100%; */
+      width: calc(20*1vw) !important;
+    }
+  }
+  @media ( 1289px<=width<=1500px) {
+    .search_bar{
+     
+      /* background-color: rgb(104, 104, 198) !important; */
+    }
+    .search{
+      /* width: 100%; */
+      width: calc(20*2.2vw) !important;
+    }
+  }
+  

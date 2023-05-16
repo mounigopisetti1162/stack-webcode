@@ -16,7 +16,7 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { Link, useNavigate } from 'react-router-dom';
-
+import './header.css';
 export default function Header()
 {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -29,25 +29,20 @@ export default function Header()
   };
   const nav=useNavigate()
     return(
-        <header>
+        <header class="s-topbar ps-fixed t0 l0 js-top-bar">
+         <hr></hr>
+         
         <div className="header-bar">
+        
         <div className="three_lines">
         <React.Fragment>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <Box sx={{ display: 'flex' }}>
         
         
         <Tooltip title="Account settings">
             
-            <IconButton
-            onClick={handleClick}
-            size="small"
-            sx={{ ml: 2 }}
-            aria-controls={open ? 'account-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-          >
-<HorizontalSplitIcon color="action" fontSize='small' />
-</IconButton>
+<HorizontalSplitIcon color="black" fontSize='medium' className='threeline'/>
+{/* </IconButton> */}
 </Tooltip>
       </Box>
       <Menu
@@ -118,6 +113,9 @@ export default function Header()
                 <img src="stack.png" alt='stackover' className='stack'/>
                 </Link>
             </div>
+            <div className='content'>
+
+            
             <div className="about">
                 About
             </div>
@@ -125,7 +123,8 @@ export default function Header()
                 Products
             </div>
             <div className="for_team">
-                For Team
+                For Teams
+            </div>
             </div>
             <div className="search_bar">
                 
@@ -133,11 +132,15 @@ export default function Header()
             <input  placeholder="Search..."  className='search' /> 
 
             </div>
+            <div className='buttons'>
+
+          
             <div className="login">
-            <Button variant="outlined" className='header-buttons' onClick={()=>{nav('/login')}}>Log in</Button>
+            <Button variant="outlined" className='logins' onClick={()=>{nav('/login')}}>Log in</Button>
             </div>
             <div className="sign_up">
             <Button variant="contained" className='header-buttons' onClick={()=>{nav('/signup')}}>Sign up</Button>
+            </div>
             </div>
         
         

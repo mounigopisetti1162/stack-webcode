@@ -155,7 +155,7 @@ const token2=useParams();
 
             </div>
             {localStorage.getItem("token")&& token2?<div>
-              {user? user.firstname:" "}
+              {user? user.firstname:"user"}
               {user?<img className='imgpro' src={user.profile!==undefined?user.profile.myfile:"stackicon.png"} alt="name"
             ></img> :""}
              

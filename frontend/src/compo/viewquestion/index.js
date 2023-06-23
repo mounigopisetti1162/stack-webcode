@@ -5,7 +5,7 @@ import MainQuestion from './MainQuestion'
 function Index() {
   return (
     <div className='stack-page'>
-        <div className='stack-content'>
+        <div className='stackcontent'>
             <Sidebar/>
             <MainQuestion/>
         </div>

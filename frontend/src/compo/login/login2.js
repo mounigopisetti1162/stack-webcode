@@ -65,14 +65,25 @@ if(data.message==="logged in sucessfully")
 //   const id=(data.emailfound._id)
 // nav(`/message/${id}`);
 console.log("loged")
-nav("/")
+nav(`/${data.token}`)
 toast("Logged in sucessfully")
 localStorage.setItem('token',data.token);
+}
+else if(data.status===401)
+{
+  toast("invalid credentials")
+  console.log("njkhf")
+}
+else 
+{
+  toast("email not registered")
+  console.log("njkhf")
 }
 })
 .catch((err)=>{
   // console.log(err);
-toast("inalid credentials")})
+// toast("inalid credentials")
+})
 }
 
 const renderError = (message) => <p className="help is-danger">{message}</p>;

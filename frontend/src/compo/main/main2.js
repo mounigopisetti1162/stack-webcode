@@ -2,7 +2,7 @@ import React from 'react'
 import { Button,Link } from '@mui/material'
 import Allquestions from './Allquestions'
 import { useNavigate } from 'react-router-dom'
-
+import './main2.css'
 function Main({questions}) {
     const nav=useNavigate()
     const question=()=>{
@@ -14,31 +14,32 @@ function Main({questions}) {
     <div className='main-container'>
         <div className='main-components'>
             <div className='top-main'>
-            <h1 class="flex--item fl1 fs-headline1 mb0">
-Search Results            </h1>
-            <Link className='advanced'>Advanced Search Tips</Link>
-            <Button variant="contained" onClick={question}>Ask Question</Button>
+            <h1 className="flex--item fl1 fs-headline1 mb0 tesxt">
+Top Questions          </h1>
+            <button variant="contained" onClick={question} id='btnclg'>Ask Question</button>
         </div>
         <div className='main-filter'>
-            <p>All questions</p>
+          
             <div className='main-tabs'>
                 <div className='main-tab'>
 
                
             <div className='relevance'>
-                <Link>Relevance</Link>
+                <Link >Interesting</Link>
             </div>
             <div className='newest'>
-                <Link>Newest</Link>
+                <Link>Week</Link>
             </div>
             <div className='More'>
-                <Link>More</Link>
+                <Link>Month</Link>
             </div>
         </div>
         <hr></hr>
+        <hr></hr>
         </div>
     </div>
-    <div className="questions">
+            <hr></hr>
+    <div className="questions" id='questions'>
           {questions?.map((_q,key) => (
             <div className="question" key={key}>
               <Allquestions data={_q} />

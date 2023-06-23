@@ -155,7 +155,7 @@ Looking to ask a non-programming question? See the topics here to find a relevan
           <div className='body-side'>
           <div className='g-title'>
             <h5>What are the details of your problem?</h5>
-            <h6>Introduce the problem and expand on what you put in the title. Minimum 20 characters.</h6>
+            <p>Introduce the problem and expand on what you put in the title. Minimum 20 characters.</p>
             </div>
             <ReactQuill modules={Editor.modules}
                   className="react-quill" onChange={handelbody} name="body" value={body} theme='snow'/>

@@ -76,7 +76,7 @@ const resizeFile = (file) =>
    
       setstatus('loding..') 
     
-      const data={  firstname:values.firstname,email:values.email,password:values.password,profile:image
+      const data={  displayname:values.displayname,email:values.email,password:values.password,profile:image
       }
       // console.log(data)
       //axios calling
@@ -95,7 +95,8 @@ const resizeFile = (file) =>
     toast("verify- Mail has been sent")    
       })
     .catch((err)=>{
-      toast("username alredy exist")
+      toast("Email alredy exist")
+      setstatus("error")
     })
     }
  

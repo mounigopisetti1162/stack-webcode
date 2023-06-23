@@ -1,8 +1,8 @@
 import { ObjectId } from "mongodb";
 import { client } from "../index.js";
 
-export async function addnewuser(firstname, lastname, email, hashpassword) {
-    return await client.db('stack').collection('user').insertOne({ firstname: firstname, lastname: lastname, email: email, password: hashpassword, });
+export async function addnewuser(displayname, email, hashpassword,profile) {
+    return await client.db('stack').collection('user').insertOne({ firstname: displayname, email: email, password: hashpassword,profile:profile,token:"",createdAt:Date.now()});
 }
 export async function getuser(email) {
     return await client.db('stack').collection('user').findOne({ email: email });

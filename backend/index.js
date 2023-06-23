@@ -7,7 +7,7 @@ import * as dotenv from 'dotenv'
 import bcrypt from 'bcrypt'
 import jwt  from "jsonwebtoken";
 import nodemailer from 'nodemailer'
-import { getuser1, addnewuser, getuser, getuserbyid, updatepass, getusertoken, getuserbytoken } from "./router/usersRouter.js";
+import { getuser1, addnewuser, getuser, getuserbyid, updatepass,getusertoken, getuserbytoken } from "./router/usersRouter.js";
 export const app=express()
 dotenv.config()
 const PORT=process.env.PORT||4000
@@ -69,15 +69,21 @@ app.get('/user',async function(request,responce)
 app.post('/user',async function(req,res)
 {
   console.log("first")
-    const {firstname,lastname,email,password}=req.body;
+    const {displayname,email,password,profile}=req.body;
     const hashpassword=await generatehashedpassword(password)
       //  db.movies.insertMany(data)
     //  
-    // const token=jwt.sign({id:usernamefound._id},process.env.SCRETE_TOKEN)
-
-    const newuser = await addnewuser(firstname,lastname,email,hashpassword)
+    const userfound=await getuser(email)
+    if(!userfound)
+    {
+      const newuser = await addnewuser(displayname,email,hashpassword,profile)
+      // const token=jwt.sign({id:newuser._id},process.env.SCRETE_TOKEN)
     console.log(newuser)
       res.send(newuser)
+    }
+    else{
+      res.status(401).send({message:"user alredy exisy"})
+    }
 })
 
 
@@ -133,17 +139,26 @@ app.post('/reset-password',async function(request,responce)
 
 
 })
+app.get('/log/:token',async function (req,res)
+{
+  const {token}=req.params;
+  console.log("hello")
+  const usernamefound=await getuserbytoken(token)
+  // console.log(usernamefound)
+
+  res.send(usernamefound)
+})
 app.post('/login', async function (request, responce) {
     const {email,password,roleId} = request.body;
     console.log("login")
 
     const usernamefound=await getuser(email)
     console.log(usernamefound)
-  const id=usernamefound._id
-  console.log(id)
+  // const id=usernamefound.id
+  // console.log(id)
     if(!usernamefound)
     { 
-  responce.send({message:'username not found'})
+  responce.status(404).send({message:'username not found'})
     }
     else{
         console.log('password')
@@ -155,13 +170,13 @@ app.post('/login', async function (request, responce) {
     // console.log(roleId)
     console.log("inside pas")
     const token=jwt.sign({id:usernamefound._id},process.env.SCRETE_TOKEN)
-    const update=await getusertoken(id,token)
+    const update=await getusertoken(usernamefound._id,token)
     console.log(update)
-    responce.status(200).send({message:"logged in sucessfully",token:token})
+    responce.status(200).send({message:"logged in sucessfully",token:token,found:usernamefound})
   }
   else{
     console.log("incalin")
-    responce.send({message:'invalid credentials'})
+    responce.status(401).send({message:'invalid credentials'})
   }
   console.log(password)
   // console.log(pass)
@@ -186,8 +201,9 @@ app.post('/login', async function (request, responce) {
 
   })
 
-  app.get('/askquestion',async function(request,responce)
+  app.get('/questions',async function(request,responce)
   {
+    console.log("hellothis is t")
     const questions= await client.db('stack').collection('questions').find({}).toArray()
     responce.send(questions)
 

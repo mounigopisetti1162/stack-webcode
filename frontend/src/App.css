@@ -5,12 +5,12 @@
 .stack-page
 {
   display: flex;
-  min-height: 85vh;
-  min-width: fit-content;
+  /* min-height: 85vh; */
+  /* min-width: fit-content; */
 }
 .stack-content{
-  display: flex;
-  width: 100%;
+  /* display: flex; */
+  /* width: 100%; */
 }
 .sidebar{
   margin-top: 10px;
@@ -119,22 +119,26 @@ cursor: pointer;
 }
 .main-tabs{
   display: flex;
+  justify-content: flex-end;
+  align-items: flex-end !important;
   /* flex-direction: row;
    */
-   margin-right: 20px;
-   margin-left: 10px;
+   /* margin-right: 20px; */
+   /* margin-left: 10px; */
 }
 .main-tab{
   display: flex;
   flex-direction: row;
-  padding: 10px;
+  justify-content: flex-end !important;
+  align-items: flex-end !important;
+  /* padding: 10px; */
   /* border: 1px solid rgb(18, 13, 13); */
 
   
 }
 .relevance,.newest,.More{
   border: 1px solid rgb(159, 147, 147);
-
+text-align: center;
   padding: 13px;
   align-items: center;
   justify-content: center;
@@ -237,18 +241,18 @@ flex-direction: column;
 .tags{
   display: flex;
   flex-direction: row !important;
-  margin: 10px 5px;
-  padding: 5px 10px;
+  /* margin: 10px 5px; */
+  /* padding: 5px 10px; */
   align-items: end !important;
   justify-content: flex-start !important;
 
 
 }
-.tags >div{
+.tags >.tag{
   display: flex;
   flex-direction: row !important;
   background-color: hsl(205deg 46% 92%);
   padding: 5px;
   margin: 5px;
-  border-radius: 40%;
+  border-radius: 10%;
 }

@@ -19,6 +19,10 @@
 
 
 }
+.react-quill,.body-side{
+  width:500px;
+
+}
 .title{
     margin-inline-start: 15px;
 }

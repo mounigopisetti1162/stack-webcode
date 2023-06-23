@@ -15,8 +15,12 @@ import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import './header.css';
+import { useEffect,useState } from 'react';
+import { getpic } from './axios/axios';
+import { API } from './login/global';
+import axios from 'axios';
 export default function Header()
 {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -28,6 +32,24 @@ export default function Header()
     setAnchorEl(null);
   };
   const nav=useNavigate()
+  const [user,setuser]=useState();
+const token=localStorage.getItem("token");
+const token2=useParams();
+
+  useEffect(()=>{
+    function getprofile() {
+      fetch(`${API}/log/${token}`).then((data) => data.json()).then((res)=>{
+   
+        setuser(res);
+        console.log(res)
+      }).catch((err)=>console.log(err))
+   }
+   
+    getprofile();
+  },[token2.token])
+
+// console.log(user);
+
     return(
         <header class="s-topbar ps-fixed t0 l0 js-top-bar">
          <hr></hr>
@@ -113,7 +135,7 @@ export default function Header()
                 <img src="stack.png" alt='stackover' className='stack'/>
                 </Link>
             </div>
-            <div className='content'>
+            <div className='content' id='content'>
 
             
             <div className="about">
@@ -132,6 +154,14 @@ export default function Header()
             <input  placeholder="Search..."  className='search' /> 
 
             </div>
+            {localStorage.getItem("token")&& token2?<div>
+              {user? user.firstname:" "}
+              {user?<img className='imgpro' src={user.profile!==undefined?user.profile.myfile:"stackicon.png"} alt="name"
+            ></img> :""}
+             
+            </div> 
+            
+            :
             <div className='buttons'>
 
           
@@ -141,7 +171,7 @@ export default function Header()
             <div className="sign_up">
             <Button variant="contained" className='header-buttons' onClick={()=>{nav('/signup')}}>Sign up</Button>
             </div>
-            </div>
+            </div>}
         
         
         </div>

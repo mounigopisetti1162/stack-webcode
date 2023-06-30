@@ -9,17 +9,18 @@ import jwt  from "jsonwebtoken";
 import nodemailer from 'nodemailer'
 import { getuser1, addnewuser, getuser, getuserbyid, updatepass,getusertoken, getuserbytoken } from "./router/usersRouter.js";
 export const app=express()
-app.use(cors({
-  // origin:"http://localhost:3000",
-  origin:"https://cute-boba-723607.netlify.app",
-        // allowedHeaders: ["my-custom-header"],
-        // credentials: true,
-        withCredentials: true,
-        allowRequest: (req, callback) => {
-            const noOriginHeader = req.headers.origin === undefined;
-            callback(null, noOriginHeader); // only allow requests without 'origin' header
-          }
-}))
+app.use(cors());
+// app.use(cors({
+//   // origin:"http://localhost:3000",
+//   origin:"https://cute-boba-723607.netlify.app",
+//         // allowedHeaders: ["my-custom-header"],
+//         // credentials: true,
+//         withCredentials: true,
+//         allowRequest: (req, callback) => {
+//             const noOriginHeader = req.headers.origin === undefined;
+//             callback(null, noOriginHeader); // only allow requests without 'origin' header
+//           }
+// }))
 app.use(express.json())
 dotenv.config()
 const PORT=process.env.PORT||4000

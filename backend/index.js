@@ -13,13 +13,30 @@ dotenv.config()
 const PORT=process.env.PORT||4000
 const MONGO_URL=process.env.MONGO_URL
 const client=new MongoClient(MONGO_URL)
+
+// const corsOptions ={
+//   origin:'*', 
+//   credentials:true,            //access-control-allow-credentials:true
+//   optionSuccessStatus:200,
+// }
+
+
 await client.connect()
 console.log("monggo connected")
 
 app.use(express.json())
 app.use(cors({
-  origin:"*",
+  origin:"http://localhost:3000",
+        allowedHeaders: ["my-custom-header"],
+        credentials: true,
+        withCredentials: true,
+        allowRequest: (req, callback) => {
+            const noOriginHeader = req.headers.origin === undefined;
+            callback(null, noOriginHeader); // only allow requests without 'origin' header
+          }
 }))
+
+// app.use(cors(corsOptions))
 app.use(express.urlencoded({extended:false}))
 app.set('view engine','ejs')
 

@@ -17,7 +17,9 @@ await client.connect()
 console.log("monggo connected")
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  origin:"*",
+}))
 app.use(express.urlencoded({extended:false}))
 app.set('view engine','ejs')
 

@@ -14,12 +14,30 @@ const PORT=process.env.PORT||4000
 const MONGO_URL=process.env.MONGO_URL
 const client=new MongoClient(MONGO_URL)
 
-// const corsOptions ={
-//   origin:'*', 
-//   credentials:true,            //access-control-allow-credentials:true
-//   optionSuccessStatus:200,
-// }
+// app.use(cors(
+//   {
+//     origin:"http://localhost:3000",
+//     // methods:["GET","PUT","POST",],
+//     // allowedHeaders: ["my-custom-header"],
+//     // // Access-Control-Request-Headers: "Content-Type",
+//     // credentials: true,
+//     withCredentials: true,
+//     allowRequest: (req, callback) => {
+//         const noOriginHeader = req.headers.origin === undefined;
+//         callback(null, noOriginHeader); // only allow requests without 'origin' header
+//       }
+//   }
+// ));
 
+// const corsOptions = {
+//   origin: (origin, callback) => {
+//     if (allowedOrigins.includes(origin) || !origin) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Origin not allowed by CORS'));
+//     }
+//   },
+// };
 
 await client.connect()
 console.log("monggo connected")
@@ -27,8 +45,8 @@ console.log("monggo connected")
 app.use(express.json())
 app.use(cors({
   origin:"http://localhost:3000",
-        allowedHeaders: ["my-custom-header"],
-        credentials: true,
+        // allowedHeaders: ["my-custom-header"],
+        // credentials: true,
         withCredentials: true,
         allowRequest: (req, callback) => {
             const noOriginHeader = req.headers.origin === undefined;
@@ -75,10 +93,9 @@ async function generatehashedpassword(password){
     const hashedpassword=await bcrypt.hash(password,salt)
     return hashedpassword
 }  
-app.get('/',function(request,responce)
-{
-    responce.send("this is the password page")
-})
+app.get('/', (req, res, next) => {
+  res.json({ message: 'This route is CORS-enabled for an allowed origin.' });
+});
 app.get('/user',async function(request,responce)
 {
     const user=await getuser1()

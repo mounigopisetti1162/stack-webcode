@@ -44,7 +44,8 @@ console.log("monggo connected")
 
 app.use(express.json())
 app.use(cors({
-  origin:"http://localhost:3000",
+  // origin:"http://localhost:3000",
+  origin:"https://cute-boba-723607.netlify.app",
         // allowedHeaders: ["my-custom-header"],
         // credentials: true,
         withCredentials: true,

@@ -10,47 +10,19 @@ import nodemailer from 'nodemailer'
 import { getuser1, addnewuser, getuser, getuserbyid, updatepass,getusertoken, getuserbytoken } from "./router/usersRouter.js";
 export const app=express()
 app.use(cors());
-// app.use(cors({
-//   // origin:"http://localhost:3000",
-//   origin:"https://cute-boba-723607.netlify.app",
-//         // allowedHeaders: ["my-custom-header"],
-//         // credentials: true,
-//         withCredentials: true,
-//         allowRequest: (req, callback) => {
-//             const noOriginHeader = req.headers.origin === undefined;
-//             callback(null, noOriginHeader); // only allow requests without 'origin' header
-//           }
-// }))
+
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  next();
+})
+
 app.use(express.json())
 dotenv.config()
 const PORT=process.env.PORT||4000
 const MONGO_URL=process.env.MONGO_URL
 const client=new MongoClient(MONGO_URL)
-
-// app.use(cors(
-//   {
-//     origin:"http://localhost:3000",
-//     // methods:["GET","PUT","POST",],
-//     // allowedHeaders: ["my-custom-header"],
-//     // // Access-Control-Request-Headers: "Content-Type",
-//     // credentials: true,
-//     withCredentials: true,
-//     allowRequest: (req, callback) => {
-//         const noOriginHeader = req.headers.origin === undefined;
-//         callback(null, noOriginHeader); // only allow requests without 'origin' header
-//       }
-//   }
-// ));
-
-// const corsOptions = {
-//   origin: (origin, callback) => {
-//     if (allowedOrigins.includes(origin) || !origin) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error('Origin not allowed by CORS'));
-//     }
-//   },
-// };
 
 await client.connect()
 console.log("monggo connected")

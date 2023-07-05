@@ -93,7 +93,8 @@ const renderError = (message) => <p className="help is-danger">{message}</p>;
   <div className="sign1">
     
     <div className="signup1">
-    
+    <p>User:user123@gmail.com <br></br>
+      password:12345678</p>
       <div className="signwrapper1">
       <div className='icons'>
 <Link to="/">

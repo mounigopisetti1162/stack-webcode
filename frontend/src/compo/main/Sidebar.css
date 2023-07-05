@@ -37,7 +37,7 @@
 }
 @media ( 1289px<=width<=1500px) {
     .sidebar{
-        background-color: rgb(161, 38, 63);
+        /* background-color: rgb(161, 38, 63); */
         width: 200px !important;
         /* flex: 1 !important; */
     }
